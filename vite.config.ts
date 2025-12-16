@@ -51,6 +51,7 @@
       },
     },
     build: {
+      chunkSizeWarningLimit: 1600,
       target: 'esnext',
       rollupOptions: {
         output: {
