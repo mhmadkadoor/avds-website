@@ -1,7 +1,7 @@
 import { Vehicle, SearchAnalytics, Feature } from './types';
 
-const API_BASE_URL = 'https://avdsback.pythonanywhere.com/api';
-const BASE_URL = 'https://avdsback.pythonanywhere.com/';
+const API_BASE_URL = 'https://avdsback2.pythonanywhere.com/api';
+const BASE_URL = 'https://avdsback2.pythonanywhere.com/';
 
 const getFullImageUrl = (url: string) => {
   if (!url) return '';

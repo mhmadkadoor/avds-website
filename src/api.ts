@@ -1,4 +1,4 @@
-const API_BASE_URL = 'https://avdsback.pythonanywhere.com/api';
+const API_BASE_URL = 'https://avdsback2.pythonanywhere.com/api';
 
 export interface Make {
     makeId: number;
