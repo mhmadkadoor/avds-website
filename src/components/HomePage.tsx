@@ -63,7 +63,7 @@ export function HomePage() {
       {mostViewedVehicles.length > 0 && (
         <section className="py-16 px-4 bg-muted/30">
           <div className="container mx-auto">
-            <h2 className="mb-8 text-center text-foreground">Most Viewed Vehicles</h2>
+            <h2 className="mb-8 text-center text-foreground">{t.MostViewedVehicles}</h2>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
               {mostViewedVehicles.map((vehicle) => (
                 <VehicleCard
@@ -80,7 +80,7 @@ export function HomePage() {
       <section className="py-16 px-4">
         <div className="container mx-auto">
           <h2 className="mb-8 text-center text-foreground">
-            Latest Vehicles
+            {t.LatestVehicles}
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {visibleVehicles.map((vehicle) => (
@@ -99,7 +99,7 @@ export function HomePage() {
                 variant="outline"
                 size="lg"
               >
-                Show More
+                {t.ShowMore}
               </Button>
             </div>
           )}

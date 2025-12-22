@@ -15,9 +15,12 @@ export const translations = {
 
     // Home Page
     findYourDreamVehicle: 'Find Your Dream Vehicle',
+    MostViewedVehicles:'Most Viewed Vehicles',
     searchThousands: 'Search thousands of premium vehicles with our advanced AI-powered platform',
     searchByMake: 'Search by make, model, or type...',
     searchVehicles: 'Search vehicles...',
+    LatestVehicles:'Latest Vehicles',
+    ShowMore:'Show More',
     search: 'Search',
     featuredVehicles: 'Featured Vehicles',
     seeAllVehicles: 'See All Vehicles',
@@ -298,8 +301,11 @@ export const translations = {
     // Home Page
     findYourDreamVehicle: 'Hayalinizdeki Aracı Bulun',
     searchThousands: 'Gelişmiş yapay zeka destekli platformumuzla binlerce premium aracı arayın',
+    MostViewedVehicles:'En Fazla Görülen Araçlar',
     searchByMake: 'Marka, model veya türe göre arayın...',
     searchVehicles: 'Araç ara...',
+    LatestVehicles:'Son Eklenen Araçlar',
+    ShowMore:'Daha Fazla Göster',
     search: 'Ara',
     featuredVehicles: 'Öne Çıkan Araçlar',
     seeAllVehicles: 'Tüm Araçları Gör',
@@ -575,8 +581,11 @@ export const translations = {
     // Home Page
     findYourDreamVehicle: 'اعثر على سيارة أحلامك',
     searchThousands: 'ابحث في آلاف السيارات المميزة مع منصتنا المدعومة بالذكاء الاصطناعي',
+    MostViewedVehicles:'السيارات الاكثر مشاهدة',
     searchByMake: 'ابحث حسب الماركة، الموديل، أو النوع...',
     searchVehicles: 'بحث عن السيارات...',
+    LatestVehicles:'أحدث السيارات',
+    ShowMore:'أظهر المزيد',
     search: 'بحث',
     featuredVehicles: 'سيارات مميزة',
     seeAllVehicles: 'عرض جميع السيارات',

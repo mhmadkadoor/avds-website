@@ -20,6 +20,7 @@ export function AuthPage({ onSuccess }: AuthPageProps) {
   const t = translations[language];
   const [searchParams, setSearchParams] = useSearchParams();
   const isSignUp = searchParams.get('mode') === 'signup';
+  const redirect = searchParams.get('redirect');
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -67,7 +68,11 @@ export function AuthPage({ onSuccess }: AuthPageProps) {
         await login(email, password);
         toast.success(t.signedInSuccess);
       }
-      onSuccess();
+      if (redirect) {
+        navigate(redirect);
+      } else {
+        onSuccess();
+      }
     } catch (error: any) {
       console.error(error);
       const errorMessage = error.message || (isSignUp ? 'Registration failed' : 'Login failed. Please check your credentials.');
@@ -199,7 +204,11 @@ export function AuthPage({ onSuccess }: AuthPageProps) {
 
           <div className="mt-6 text-center text-sm">
             <button
-              onClick={() => setSearchParams({ mode: isSignUp ? 'login' : 'signup' })}
+              onClick={() => {
+                const newParams = new URLSearchParams(searchParams.toString());
+                newParams.set('mode', isSignUp ? 'login' : 'signup');
+                setSearchParams(newParams);
+              }}
               className="text-primary hover:underline"
             >
               {isSignUp

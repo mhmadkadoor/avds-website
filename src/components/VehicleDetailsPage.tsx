@@ -184,24 +184,22 @@ export function VehicleDetailsPage({ vehicleId: propVehicleId, onBack }: Vehicle
                 <h1 className="mb-2 text-foreground">{vehicle.title}</h1>
                 <p className="text-2xl text-primary">${vehicle.price.toLocaleString()}</p>
               </div>
-              {user && (
-                <div className="flex gap-2">
-                  {user.isAdmin && (
-                    <EditVehicleDialog
-                      vehicle={vehicle}
-                      onUpdate={setVehicle}
-                    />
-                  )}
-                  <Button
-                    variant="outline"
-                    size="icon"
-                    onClick={handleToggleFavorite}
-                    className={isFavorite ? 'text-red-500 border-red-500' : ''}
-                  >
-                    <Heart className={`h-5 w-5 ${isFavorite ? 'fill-current' : ''}`} />
-                  </Button>
-                </div>
-              )}
+              <div className="flex gap-2">
+                {user?.isAdmin && (
+                  <EditVehicleDialog
+                    vehicle={vehicle}
+                    onUpdate={setVehicle}
+                  />
+                )}
+                <Button
+                  variant="outline"
+                  size="icon"
+                  onClick={handleToggleFavorite}
+                  className={isFavorite ? 'text-red-500 border-red-500' : ''}
+                >
+                  <Heart className={`h-5 w-5 ${isFavorite ? 'fill-current' : ''}`} />
+                </Button>
+              </div>
             </div>
 
             {/* Specifications */}

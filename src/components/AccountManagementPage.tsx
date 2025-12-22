@@ -40,36 +40,27 @@ export function AccountManagementPage({ onVehicleClick, defaultTab = 'settings' 
   const [favoriteVehicles, setFavoriteVehicles] = useState<Vehicle[]>([]);
   const [loadingFavorites, setLoadingFavorites] = useState(false);
   const navigate = useNavigate();
+  const [activeTab, setActiveTab] = useState(defaultTab);
+
+  const fetchFavorites = async () => {
+    if (!user) return;
+    setLoadingFavorites(true);
+    try {
+      const data = await api.getFavorites();
+      setFavoriteVehicles(data);
+    } catch (error) {
+      console.error("Failed to fetch favorites", error);
+      // Fallback or show error
+    } finally {
+      setLoadingFavorites(false);
+    }
+  };
 
   useEffect(() => {
-    const fetchFavorites = async () => {
-      if (!user) return;
-      setLoadingFavorites(true);
-      try {
-        // If we are using the real backend, we should fetch from API.
-        // However, the AuthContext currently manages favorites locally in the mock version.
-        // If we switch to full backend, AuthContext should also be updated to use API for login/register/favorites.
-        // For this "check", I will try to fetch from API, but fallback to empty or handle error.
-        // Since I haven't updated AuthContext to use API, this might fail if I don't have a token.
-        // But let's assume we want to move towards API.
-
-        // For now, let's just comment out the API call and use the mock logic if we can't authenticate.
-        // But the goal is to link them.
-        // I'll add the API call.
-        const data = await api.getFavorites();
-        setFavoriteVehicles(data);
-      } catch (error) {
-        console.error("Failed to fetch favorites", error);
-        // Fallback or show error
-      } finally {
-        setLoadingFavorites(false);
-      }
-    };
-
-    if (defaultTab === 'favorites') {
+    if (activeTab === 'favorites') {
       fetchFavorites();
     }
-  }, [user, defaultTab]);
+  }, [user, activeTab]);
 
   const handleSaveSettings = () => {
     toast.success(t.settingsSaved);
@@ -94,7 +85,7 @@ export function AccountManagementPage({ onVehicleClick, defaultTab = 'settings' 
       <div className="px-4 py-8">
         <h1 className="mb-8 text-foreground">{t.accountManagement}</h1>
 
-        <Tabs defaultValue={defaultTab} className="w-full">
+        <Tabs defaultValue={defaultTab} onValueChange={(value) => setActiveTab(value as any)} className="w-full">
           <TabsList className="grid w-full max-w-md grid-cols-2 mb-8 bg-muted">
             <TabsTrigger value="settings">
               <Settings className="mr-2 h-4 w-4" />
@@ -189,7 +180,11 @@ export function AccountManagementPage({ onVehicleClick, defaultTab = 'settings' 
                 </CardDescription>
               </CardHeader>
               <CardContent>
-                {favoriteVehicles.length > 0 ? (
+                {loadingFavorites ? (
+                  <div className="text-center py-12">
+                    <p className="text-muted-foreground">Loading favorites...</p>
+                  </div>
+                ) : favoriteVehicles.length > 0 ? (
                   <div className="space-y-3">
                     {favoriteVehicles.map((vehicle) => (
                       <div
@@ -236,6 +231,8 @@ export function AccountManagementPage({ onVehicleClick, defaultTab = 'settings' 
                             onClick={(e) => {
                               e.stopPropagation();
                               toggleFavorite(vehicle.id);
+                              // Optimistically remove from UI
+                              setFavoriteVehicles(favs => favs.filter(v => v.id !== vehicle.id));
                               toast.success('Removed from favorites');
                             }}
                           >
